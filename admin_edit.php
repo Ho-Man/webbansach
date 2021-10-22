@@ -20,12 +20,12 @@
 
 	// get book data
 	$query = "SELECT * FROM books WHERE book_isbn = '$book_isbn'";
-	$result = mysqli_query($conn, $query);
+	$result = pg_query($conn, $query);
 	if(!$result){
-		echo "Can't retrieve data " . mysqli_error($conn);
+		echo "Can't retrieve data " . pg_error($conn);
 		exit;
 	}
-	$row = mysqli_fetch_assoc($result);
+	$row = pg_fetch_assoc($result);
 ?>
 	<form method="post" action="edit_book.php" enctype="multipart/form-data">
 		<table class="table">
@@ -64,6 +64,6 @@
 	<br/>
 	<a href="admin_book.php" class="btn btn-success">Confirm</a>
 <?php
-	if(isset($conn)) {mysqli_close($conn);}
+	if(isset($conn)) {pg_close($conn);}
 	require "./template/footer.php"
 ?>
