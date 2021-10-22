@@ -25,11 +25,11 @@
 
 	// if publisher is not in db, create new
 	$findPub = "SELECT * FROM publisher WHERE publisher_name = '$publisher'";
-	$findResult = mysqli_query($conn, $findPub);
+	$findResult = pg_query($conn, $findPub);
 	if(!$findResult){
 		// insert into publisher table and return id
 		$insertPub = "INSERT INTO publisher(publisher_name) VALUES ('$publisher')";
-		$insertResult = mysqli_query($conn, $insertPub);
+		$insertResult = pg_query($conn, $insertPub);
 		if(!$insertResult){
 			echo "Can't add new publisher " . mysqli_error($conn);
 			exit;
@@ -48,7 +48,7 @@
 		$query .= " WHERE book_isbn = '$isbn'";
 	}
 	// two cases for fie , if file submit is on => change a lot
-	$result = mysqli_query($conn, $query);
+	$result = pg_query($conn, $query);
 	if(!$result){
 		echo "Can't update data " . mysqli_error($conn);
 		exit;
